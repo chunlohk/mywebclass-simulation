@@ -71,61 +71,67 @@ function initializePrivacyModal() {
     gtag('consent', 'update', {
       analytics_storage: 'granted'
     })
-  })
-
-  // Handle the click event on the Disagree button
-  const disagreeButton = document.getElementById('disagreeButton')
-  disagreeButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    // Remember the user's choice
-    localStorage.setItem('privacyPolicyAgreed', 'false')
-    // Disable Google Analytics tracking
-    gtag('consent', 'update', {
-      analytics_storage: 'denied'
+    // Trigger the Google Analytics event for button click
+    gtag('event', 'privacy_consent', {
+        'event_category': 'privacy',
+        'event_label': 'consent_given',
+        'value': 1
+      });
     })
-    // Hide the modal
-    privacyModal.hide()
-    // Redirect to GitHub
-    window.location.href = 'https://github.com'
-  })
-}
 
-function loadGoogleAnalytics() {
-  // Replace "GA_MEASUREMENT_ID" with your Google Analytics Measurement ID
-  const gaMeasurementId = 'J2FCEQRZJ1'
-
-  // Load the Google Analytics tracking code
-  const script = document.createElement('script')
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`
-  script.async = true
-  document.head.appendChild(script)
-
-  // Initialize Google Analytics tracking
-  window.dataLayer = window.dataLayer || []
-  function gtag() { dataLayer.push(arguments) }
-  gtag('js', new Date())
-  gtag('config', gaMeasurementId, { anonymize_ip: true })
-
-  // Check if the user has provided consent for Google Analytics tracking
-  const consent = localStorage.getItem('googleAnalyticsConsent')
-  if (consent === 'granted') {
-    // Enable Google Analytics tracking if consent has been granted
-    gtag('consent', 'update', {
-      analytics_storage: 'granted'
+    // Handle the click event on the Disagree button
+    const disagreeButton = document.getElementById('disagreeButton')
+    disagreeButton.addEventListener('click', (event) => {
+      event.preventDefault();
+      // Remember the user's choice
+      localStorage.setItem('privacyPolicyAgreed', 'false')
+      // Disable Google Analytics tracking
+      gtag('consent', 'update', {
+        analytics_storage: 'denied'
+      })
+      // Hide the modal
+      privacyModal.hide()
+      // Redirect to GitHub
+      window.location.href = 'https://github.com'
     })
-  } else if (consent === 'denied') {
-    // Disable Google Analytics tracking if consent has been denied
-    gtag('consent', 'update', {
-      analytics_storage: 'denied'
-    })
-  } else {
-    // Show the privacy modal if no consent has been given
-    initializePrivacyModal()
   }
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-  createPrivacyModal()
-  loadGoogleAnalytics()
-  initializePrivacyModal()
-})
+  function loadGoogleAnalytics() {
+    // Replace "GA_MEASUREMENT_ID" with your Google Analytics Measurement ID
+    const gaMeasurementId = 'J2FCEQRZJ1'
+
+    // Load the Google Analytics tracking code
+    const script = document.createElement('script')
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`
+    script.async = true
+    document.head.appendChild(script)
+
+    // Initialize Google Analytics tracking
+    window.dataLayer = window.dataLayer || []
+    function gtag() { dataLayer.push(arguments) }
+    gtag('js', new Date())
+    gtag('config', gaMeasurementId, { anonymize_ip: true })
+
+    // Check if the user has provided consent for Google Analytics tracking
+    const consent = localStorage.getItem('googleAnalyticsConsent')
+    if (consent === 'granted') {
+      // Enable Google Analytics tracking if consent has been granted
+      gtag('consent', 'update', {
+        analytics_storage: 'granted'
+      })
+    } else if (consent === 'denied') {
+      // Disable Google Analytics tracking if consent has been denied
+      gtag('consent', 'update', {
+        analytics_storage: 'denied'
+      })
+    } else {
+      // Show the privacy modal if no consent has been given
+      initializePrivacyModal()
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    createPrivacyModal()
+    loadGoogleAnalytics()
+    initializePrivacyModal()
+  })
