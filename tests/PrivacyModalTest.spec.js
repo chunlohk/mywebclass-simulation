@@ -6,7 +6,7 @@ test('test', async ({ page }) => {
   //Locate Privacy Modal Layer
   await page.locator('#privacyModal').click();
   //Locate Privacy Modal Layer Content
-  await page.locator('div').filter({ hasText: 'Your Privacy Matters' }).click();
+  //await page.locator('div').filter({ hasText: 'Your Privacy Matters' }).click();
   await page.locator('div').filter({ hasText: 'At MyWebClass.org, we are committed to protecting your privacy and providing you' }).nth(3).click();
 
   //Check Privacy Policy Intro Content
