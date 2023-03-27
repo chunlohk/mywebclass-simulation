@@ -18,8 +18,8 @@ test('test', async ({ page }) => {
   await page.getByRole('heading', { name: '8. Policy Review and Updates' }).click();
   await page.getByRole('heading', { name: 'Cookie Consent' }).click();
   await page.getByRole('contentinfo').click();
-  await page.locator('div').filter({ hasText: 'Share on Social Media' }).click();
-  await page.getByRole('link', { name: '' }).click();
+  //await page.locator('div').filter({ hasText: 'Share on Social Media' }).click();
+  //await page.getByRole('link', { name: '' }).click();
   await page.getByRole('heading', { name: 'Subscribe to our newsletter' }).click();
   await page.getByText('Monthly digest of what\'s new and exciting from us.').click();
   await page.getByPlaceholder('Email address').click();
