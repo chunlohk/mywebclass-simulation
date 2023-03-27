@@ -1,3 +1,4 @@
+```
 PS C:\Users\Chun\PycharmProjects\chun-mywebclass-simulation-4> npm run build
 
 > mywebclass.org@0.1.0 build
@@ -48,3 +49,4 @@ You can limit the size of your bundles by using import() or require.ensure to la
 For more info visit https://webpack.js.org/guides/code-splitting/
 
 webpack 5.76.3 compiled with 3 warnings in 21255 ms
+```
