@@ -4,20 +4,22 @@ import '../scss/styles.scss'
 import { Modal } from 'bootstrap'
 import * as bootstrap from 'bootstrap'
 
-import allPage from './allPages'
-import contentPage from './contentPage'
+async function initialize() {
+  const allPage = (await import('./allPages')).default;
+  const contentPage = (await import('./contentPage')).default;
 
-document.addEventListener('DOMContentLoaded', () => {
   allPage.initialize()
   contentPage.initialize()
-})
+}
+
+document.addEventListener('DOMContentLoaded', initialize)
 
 let resizeTimer
 
 window.addEventListener('resize', () => {
   clearTimeout(resizeTimer)
   resizeTimer = setTimeout(() => {
-    allPage.initialize()
+    initialize()
   }, 250)
 })
 
