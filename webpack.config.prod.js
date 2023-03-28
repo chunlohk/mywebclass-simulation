@@ -1,7 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const fs = require('fs')
-const { StatsWriterPlugin } = require('webpack-stats-plugin');
 
 // Look for .html files
 const htmlFiles = []
@@ -31,14 +30,7 @@ module.exports = {
         filename: htmlFile.replace(path.normalize('src/'), ''),
         inject: true
       })
-    ),
-    new StatsWriterPlugin({
-      filename: 'webpack-stats.json',
-      stats: {
-        all: false,
-        assets: true
-      }
-    })
+    )
   ],
   module: {
     rules: [
